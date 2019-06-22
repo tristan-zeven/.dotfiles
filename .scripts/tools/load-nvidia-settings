@@ -1,0 +1,20 @@
+#!/usr/bin/bash
+
+_nvidiaSettings=$(which nvidia-settings) || (echo "Error: nvidia-settings not found, does it exist in your PATH? Exiting.." && exit 1)
+
+echo $_nvidiaSettings
+
+$_nvidiaSettings -a "0/SyncToVBlank=1" > /dev/null
+$_nvidiaSettings -a "0/LogAnisoAppControlled=1" > /dev/null
+$_nvidiaSettings -a "0/LogAniso=0" > /dev/null
+$_nvidiaSettings -a "0/FSAAAppControlled=1" > /dev/null
+$_nvidiaSettings -a "0/FSAAAppEnhanced=0" > /dev/null
+$_nvidiaSettings -a "0/FSAA=0" > /dev/null
+$_nvidiaSettings -a "0/ShowGraphicsVisualIndicator=0" > /dev/null
+$_nvidiaSettings -a "0/XVideoSyncToDisplayID=HDMI-0" > /dev/null
+$_nvidiaSettings -a "0/OpenGLImageSettings=0" > /dev/null
+$_nvidiaSettings -a "0/AllowFlipping=1" > /dev/null
+$_nvidiaSettings -a "0/TextureClamping=1" > /dev/null
+$_nvidiaSettings -a "0/FXAA=1" > /dev/null
+$_nvidiaSettings -a "[gpu:0]/GpuPowerMizerMode=1" > /dev/null
+

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+function vsync { nvidia-settings --assign CurrentMetaMode="DPY-1: 2560x1080_75 +0+0 { ForceFullCompositionPipeline = $@ }, DPY-3: 1680x1050_60 +2560+0 { ForceFullCompositionPipeline = $@ }" ;}
+[[ $(nvidia-settings -tq CurrentMetaMode | grep ForceFullCompositionPipeline=On) ]] && vsync Off || vsync On
