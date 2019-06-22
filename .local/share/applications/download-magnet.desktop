@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=rtorrent-magnet
+Exec=/usr/local/bin/rtorrent-magnet %u
