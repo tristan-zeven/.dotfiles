@@ -1,0 +1,263 @@
+[colors]
+background = ${xrdb:background:#222}
+foreground = ${xrdb:foreground:#fff}
+primary = ${xrdb:color3:#fff}
+secondary = ${xrdb:color4:#e60053}
+alert = ${xrdb:color1:#B2535B}
+
+;------------;
+; TOPBAR dp1 ;
+;------------;
+
+[bar/dp1]
+monitor = ${env:MONITOR:HDMI-0}
+
+line-color = ${colors.foreground:#559fc6}
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+width = 100%
+height = 26
+bottom = false
+
+radius = 0.0
+fixed-center = true
+
+font-0 = "SF UI Text:style=Semibold:size=9:antialias=true;1.5"
+font-1 = "SFMono Nerd Font Mono:style=Semibold:pixelsize=16.5:antialias=true;2"
+font-2 = "Font Awesome 5 Pro Solid:style=Solid:size=7:antialias=true;1"
+font-3 = "SF UI Text:style=Semibold:size=9:antialias=true;2"
+font-4 = "SFMono Nerd Font Mono:style=Semibold:pixelsize=15:antialias=true;3"
+font-5 = "SFMono Nerd Font Mono:style=Semibold:pixelsize=14:antialias=true;1.7"
+font-6 = "Font Awesome 5 Pro Solid:style=Solid:size=10:antialias=true;1"
+font-7 = "Font Awesome 5 Pro Solid:style=Solid:size=9:antialias=true;1.2"
+font-8 = "Font Awesome 5 Pro Regular:style=Regular:size=10:antialias=true;1"
+font-9 = "Font Awesome 5 Pro Light:style=Light:size=10:antialias=true;1.9"
+font-10 = "Font Awesome 5 Pro Regular:style=Regular:size=12:antialias=true;2"
+
+
+module-margin-left = 1
+module-margin-right = 1
+
+modules-left = xwindow
+modules-center = i3
+modules-right = mpd date pulseaudio powermenu
+
+tray-position = none
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+
+;------------;
+; TOPBAR dp2 ;
+;------------;
+
+[bar/dp2]
+monitor = ${env:MONITOR:DVI-D-0}
+
+line-color = ${colors.foreground:#559fc6}
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+width = 100%
+height = 26
+bottom = false
+
+radius = 0.0
+fixed-center = true
+
+font-0 = "SF UI Text:style=Semibold:size=9:antialias=true;1.5"
+font-1 = "SFMono Nerd Font Mono:style=Semibold:pixelsize=16.5:antialias=true;2"
+font-2 = "Font Awesome 5 Pro Solid:style=Solid:size=7:antialias=true;1"
+font-3 = "SF UI Text:style=Semibold:size=9:antialias=true;2"
+font-4 = "SFMono Nerd Font Mono:style=Semibold:pixelsize=15:antialias=true;3"
+font-5 = "SFMono Nerd Font Mono:style=Semibold:pixelsize=14:antialias=true;1.7"
+font-6 = "Font Awesome 5 Pro Solid:style=Solid:size=10:antialias=true;1"
+font-7 = "Font Awesome 5 Pro Solid:style=Solid:size=9:antialias=true;1.2"
+font-8 = "Font Awesome 5 Pro Regular:style=Regular:size=10:antialias=true;1"
+font-9 = "Font Awesome 5 Pro Light:style=Light:size=10:antialias=true;1.9"
+font-10 = "Font Awesome 5 Pro Regular:style=Regular:size=12:antialias=true;2"
+
+
+module-margin-left = 1
+module-margin-right = 1
+
+modules-left = xwindow
+modules-center = i3
+modules-right = mpd date pulseaudio powermenu
+
+tray-position = none
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+;---------;
+; MODULES ;
+;---------;
+
+[module/xwindow]
+type = internal/xwindow
+format-foreground = ${colors.foreground}
+format-font = 1
+label = %title:0:30:...%
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10;
+ws-icon-default = 
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+; focused = Active workspace on focused monitor
+label-focused = %icon%
+label-focused-background = ${colors.foreground}
+label-focused-foreground = ${colors.background}
+label-focused-underline = ${colors.foreground}
+label-focused-padding = 5
+label-focused-font = 11
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = ${self.label-focused}
+label-unfocused-padding = ${self.label-focused-padding}
+label-unfocused-foreground = ${colors.foreground}
+label-unfocused-background = ${colors.background}
+label-unfocused-font = ${self.label-focused-font}
+
+; visible = Active workspace on unfocused monitor
+label-visible = ${self.label-focused}
+label-visible-background = ${self.label-unfocused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-unfocused-padding}
+label-visible-font = ${self.label-unfocused-font}
+
+; urgent = Workspace with urgency hint set
+label-urgent = ${self.label-focused}
+label-urgent-foreground = ${colors.alert}
+label-urgent-padding = ${self.label-focused-padding}
+label-urgent-font = ${self.label-focused-font}
+label-urgent-underline = ${colors.alert}
+
+[module/mpd]
+type = internal/mpd
+host=127.0.0.1
+port=6600
+
+format-playing = "%{O10}%{A1:mpdprev: A2:mpc --host=0.0.0.0 --port=6600  toggle: A3:mpdnext: A4:mpdseek+2: A5:mpdseek-2:}%{T8}%{T-}  <label-song> %{A A A A A}"
+format-paused = "%{O10}%{A1:mpdprev: A2:mpc --host=0.0.0.0 --port=6600 toggle: A3:mpdnext: A4:mpdseek+2: A5:mpdseek-2:}%{T8}%{T-}  <label-song> %{A A A A A}"
+format-playing-foreground = ${colors.foreground}
+format-playing-background = ${colors.background}
+format-paused-foreground = ${colors.primary}
+format-paused-background = ${colors.background}
+format-stopped =
+
+label-song = "%artist:0:10:...% - %title:0:17:...%"
+
+[module/date]
+type = internal/date
+interval = 5
+date = "%a"
+time = %H:%M
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+label = %date% %time%
+
+[module/pulseaudio]
+type = internal/pulseaudio
+format-volume = "   <label-volume>"
+format-volume-foreground = ${colors.foreground}
+format-volume-background = ${colors.background}
+format-volume-font = 7
+
+label-volume = "  %percentage%%"
+label-volume-font = 1
+label-volume-foreground = ${self.format-volume-foreground}
+label-volume-background = ${self.format-volume-background}
+
+format-muted = " <label-muted>"
+format-muted-foreground = ${self.format-volume-foreground}
+format-muted-font = 7
+
+label-muted = "  muted"
+label-muted-foreground = ${colors.primary}
+label-muted-font = 1
+
+[module/powermenu]
+type = custom/menu
+expand-right = false
+format-spacing = 0
+
+label-open = "  "
+label-open-font = 8
+label-open-foreground = ${colors.foreground}
+label-open-background = ${colors.background}
+label-close = "%{R}   "
+label-close-foreground = ${colors.foreground}
+label-close-background = ${colors.background}
+label-close-font = 8
+label-separator = "%{R} "
+label-separator-font = 10
+label-separator-foreground = ${colors.foreground}
+
+menu-0-0 = "${env:POWER_MENU__REBOOT:"%{R}  Restart  "}"
+menu-0-0-exec = menu-open-1
+
+menu-0-1 = ${env:POWER_MENU__POWER_OFF:"%{R}  Power off  "}
+menu-0-1-exec = menu-open-2
+
+menu-0-2 = ${env:POWER_MENU__LOGOUT:"%{R}  Log out  "}
+menu-0-2-exec = menu-open-3
+
+menu-0-3 = ${env:POWER_MENU__HIBERNATE:"%{R} Hibernate "}
+menu-0-3-exec = menu-open-4
+
+menu-0-4 = ${env:POWER_MENU__SUSPEND:"%{R}  Suspend  "}
+menu-0-4-exec = menu-open-5
+
+menu-1-0 = ${env:POWER_MENU__CONFIRM_YES:"%{R}  Yes  "}
+menu-1-0-exec = systemctl reboot
+menu-1-1 = ${env:POWER_MENU__CONFIRM_NO: "%{R}  No  "}
+menu-1-1-exec = menu-open-0
+
+menu-2-0 = ${env:POWER_MENU__CONFIRM_YES:"%{R}  Yes  "}
+menu-2-0-exec = systemctl poweroff
+menu-2-1 = ${env:POWER_MENU__CONFIRM_NO:"%{R}  No  "}
+menu-2-1-exec = menu-open-0
+
+menu-3-0 = ${env:POWER_MENU__CONFIRM_YES:"%{R}  Yes  "}
+menu-3-0-exec = i3-msg exit
+menu-3-1 = ${env:POWER_MENU__CONFIRM_NO:"%{R}  No  "}
+menu-3-1-exec = menu-open-0
+
+menu-4-0 = ${env:POWER_MENU__CONFIRM_YES:"%{R}  Yes  "}
+menu-4-0-exec = systemctl hibernate
+menu-4-1 = ${env:POWER_MENU__CONFIRM_NO:"%{R}  No  "}
+menu-4-1-exec = menu-open-0
+
+menu-5-0 = ${env:POWER_MENU__CONFIRM_YES:"%{R}  Yes  "}
+menu-5-0-exec = systemctl suspend
+menu-5-1 = ${env:POWER_MENU__CONFIRM_NO:"%{R}  No  "}
+menu-5-1-exec = menu-open-0
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosi
