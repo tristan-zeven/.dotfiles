@@ -1,0 +1,1 @@
+/home/tristan/.config/nvim/init.vim
