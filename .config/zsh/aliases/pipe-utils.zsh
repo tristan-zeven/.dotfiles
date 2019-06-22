@@ -1,0 +1,12 @@
+alias -g G='| grep -i '
+alias -g Gv= '| grep -vi '
+alias -g H='| head'
+alias -g L='| less'
+alias -g LL='2>&1 | less'
+alias -g M='| most'
+alias -g NE='2> /dev/null'
+alias -g NUL='> /dev/null 2>&1'
+alias -g S='| sort'
+alias -g T='| tail -f'
+alias -g W='| wc -l'
+
