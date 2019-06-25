@@ -1,0 +1,11 @@
+def_key "q"
+   dummy
+
+def_key "alt-q"
+   quit
+
+def_key "x"
+  delete_playlist_items
+
+def_key "P"
+  show_playlist
