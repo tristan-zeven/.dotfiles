@@ -3,8 +3,7 @@
 #
 
 # External script locations
-set $i3cmdScripts ~/.scripts/i3cmds
-set $toolScripts ~/.scripts/tools
+set $screenshotLocation ~/Data/pictures/screenshots
 
 # Set monitor names
 set $firstMonitor HDMI-0
@@ -28,6 +27,9 @@ default_floating_border pixel 2
 # Define a $mixer variable and let's make sure it uses the correct card
 # (for some reason, the order of my sound cards tend to vary from time to time)
 set $mixer --no-startup-id amixer -c$(cat /proc/asound/cards | grep CA0106 | cut -b2) -q
+
+# Somehow i3-gaps cannot seem to find 'lmc', even as it resides inside $PATH (which lmc can find it)
+set $lmc ~/.local/bin/tools/lmc
 
 # Mod4 is 'meta' key
 set $mod Mod4
@@ -197,23 +199,25 @@ exec_always --no-startup-id dunst
 exec_always --no-startup-id feh --bg-scale ~/.wallpapers/workspaces/01.png
 exec_always --no-startup-id sh ~/.config/polybar/launch.sh
 exec [ $(pgrep telegram | wc -l) = 0 ] && telegram-desktop
-exec --no-startup-id st -n dropdown_ncmpcpp -e ncmpcpp -h apresski@0.0.0.0 -p 6600 &
+exec --no-startup-id st -n dropdown_ncmpcpp -e ncmpcpp -h 0.0.0.0 -p 6600 -c ~/.config/ncmpcpp/config -b ~/.config/ncmpcpp/bindings &
 exec --no-startup-id st -n dropdown_rtorrent -e /usr/bin/rtorrent -n -o import=/srv/rtorrent/.rtorrentrc &
-exec --no-startup-id st -n dropdown_ranger -e /usr/bin/ranger $HOME &
+#exec --no-startup-id st -n dropdown_ranger -e /usr/bin/ranger $HOME &
 exec_always --no-startup-id [ $(pgrep compton | wc -l) = 0 ] && /usr/bin/compton --config $HOME/.config/compton/compton.conf -b
 
-exec --no-startup-id "$toolScripts/load-nvidia-settings"
-exec --no-startup-id "$toolScripts/togglevsync"
+exec --no-startup-id load-nvidia-settings
+exec --no-startup-id togglevsync
 
+bindsym $mod+F11 exec --no-startup-id "[ $(pgrep rtorrent | wc -l) = 0 ] && st -n dropdown_rtorrent -e rtorrent -n -o import=/srv/rtorrent/.rtorrentrc &"
+bindsym $mod+F12 exec --no-startup-id "[ $(pgrep ncmpcpp | wc -l) = 0 ] && st -n dropdown_ncmpcpp -e ncmpcpp -h 0.0.0.0 -p 6600 -c ~/.config/ncmpcpp/config -b ~/.config/ncmpcpp/bindings &"
 bindsym $mod+Control+v exec --no-startup-id togglevsync
 bindsym $mod+Control+c exec --no-startup-id [ $(pgrep compton | wc -l) = 0 ] && /usr/bin/compton --config $HOME/.config/compton/compton.conf -b
 
 
 # For advancing forward/backward in an mpd song
-#bindsym $mod+comma exec --no-startup-id lmc back 5
-#bindsym $mod+Shift+comma exec --no-startup-id lmc back 120
-#bindsym $mod+period exec --no-startup-id lmc forward 5
-#bindsym $mod+Shift+period exec --no-startup-id lmc forward 120
+bindsym $mod+comma exec --no-startup-id "$lmc back 5 &> /tmp/mod_comma"
+bindsym $mod+Shift+comma exec --no-startup-id "$lmc back 120 &> /tmp/mod_s_comma"
+bindsym $mod+period exec --no-startup-id "$lmc forward 5 &> /tmp/mod_period"
+bindsym $mod+Shift+period exec --no-startup-id "$lmc forward 120 &> /tmp/mod_s_period"
 
 ####
 ## Settings for i3-gaps
@@ -232,8 +236,8 @@ bindsym $mod+Shift+bracketright gaps inner current set 8 gaps outer current set 
 bindsym $mod+KP_Add gaps outer current plus 5
 bindsym $mod+KP_Subtract gaps outer current minus 5
 
-bindsym Print exec --no-startup-id maim ~/Media/Pictures/Screenshots/screenshot-"$(date '+%y%m%d-%H%M-%S').png"
-bindsym Shift+Print exec --no-startup-id maimpick
+bindsym Print exec --no-startup-id /usr/bin/maim $screenshotLocation/screenshot-"$(date '+%y%m%d-%H%M-%S').png"
+bindsym Shift+Print exec --no-startup-id "$i3scripts/maimpick"
 
 #bindsym XF86AudioMute		exec --no-startup-id lmc mute
 #bindsym XF86AudioLowerVolume	exec --no-startup-id lmc down 5
@@ -260,5 +264,5 @@ bindsym $mod+a exec --no-startup-id "rofi -combi-modi window,drun -show combi -t
 
 #bindsym $mod+slash exec --no-startup-id /usr/local/bin/rofigen /home/tristan/.scripts/rofi/pickCheatSheet
 
-bindsym $mod+r exec --no-startup-id st -e /usr/bin/ranger $HOME
-bindsym $mod+Shift+r [instance="dropdown_ranger"] scratchpad show, resize set 1400 1024, move position center
+# bindsym $mod+r exec --no-startup-id st -e /usr/bin/ranger $HOME
+#bindsym $mod+Shift+r [instance="dropdown_ranger"] scratchpad show, resize set 1400 1024, move position center
