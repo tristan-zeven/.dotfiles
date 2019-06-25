@@ -1,6 +1,3 @@
-alias cda='cd $HOME/.aur'
-alias cdc='cd $HOME/.config'
-alias cdd='cd $HOME/development'
 alias cdi='cd $HOME/.config/i3'
 alias cdp='cd $HOME/.config/polybar'
 alias cdr='cd $HOME/.repos'
