@@ -35,8 +35,7 @@ configuration {
 	spacing: 0;
 	background-color: #1e1f29;
 
-	font: "Iosevka SS07 Semibold 12"; 
-	/*"Overpass Nerd Font Medium 13";*/
+	font: "Iosevka SS07 Semibold 12";
 }
 
 window {
@@ -46,7 +45,8 @@ window {
 }
 
 mainbox {
-	children: [inputbar, message, sidebar, listview];
+	children: [inputbar, message, listview];
+	/*children: [inputbar, message, sidebar, listview];*/
 	spacing: 16px;
 	/*margin: 20%;*/
 	padding: 16px 0;
