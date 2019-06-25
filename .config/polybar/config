@@ -154,7 +154,7 @@ label-urgent-underline = ${colors.alert}
 
 [module/mpd]
 type = internal/mpd
-host=127.0.0.1
+host=0.0.0.0
 port=6600
 
 format-playing = "%{O10}%{A1:mpdprev: A2:mpc --host=0.0.0.0 --port=6600  toggle: A3:mpdnext: A4:mpdseek+2: A5:mpdseek-2:}%{T8}%{T-}  <label-song> %{A A A A A}"
